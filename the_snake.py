@@ -52,7 +52,7 @@ class GameObject:
     # Экран объекта
     """
     Базовый класс для игровых объектов в игре "Змейка".
-    
+
     Этот класс предоставляет основные атрибуты и методы, которые наследуются другими объектами игры.
     """
 
@@ -69,7 +69,8 @@ class GameObject:
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
     def draw(self):
-        """Метод, должен определять, как объект будет
+        """
+        Метод, должен определять, как объект будет
         отрисовываться на экране. По умолчанию — pass.
         """
         raise NotImplementedError(
@@ -78,7 +79,8 @@ class GameObject:
 
 
 class Apple(GameObject):
-    """Класс унаследованный от GameObject, описывающий яблоко
+    """
+    Класс унаследованный от GameObject, описывающий яблоко
     и действия с ним.
     """
 
@@ -112,7 +114,7 @@ class Apple(GameObject):
 class Snake(GameObject):
     """
     Класс, описывающий змейку в игре "Змейка".
-    
+
     Этот класс содержит методы для управления движением змейки, её роста при поедании яблок и проверки столкновений.
     """
 
@@ -131,7 +133,8 @@ class Snake(GameObject):
         удаляя последний элемент, если длина змейки не увеличилась.
         """
         head_position = self.get_head_position()
-        x_point, y_point = head_position  # Распаковка кортежа
+        # Распаковка кортежа
+        x_point, y_point = head_position
 
         # Обработка краёв экрана с помощью деления по модулю
         x_point = x_point % SCREEN_WIDTH
@@ -188,7 +191,7 @@ class Snake(GameObject):
 def handle_keys(game_object):
     """
     Обрабатывает нажатия клавиш для управления направлением движения змейки.
-    
+
     Параметры:
         game_object (GameObject): объект, для которого нужно обновить направление.
     """
@@ -209,30 +212,38 @@ def handle_keys(game_object):
 def main():
     """
     Основной цикл игры, где происходит инициализация, обработка событий, обновление состояния игры и отрисовка.
-    
+
     В этой функции создаются объекты змейки и яблока, обрабатываются действия пользователя и происходит отрисовка объектов на экране.
     """
     apple = Apple()
     snake = Snake()
     while True:
         clock.tick(SPEED)
-        handle_keys(snake)  # Сначала обработка нажатий клавиш
-        snake.update_direction(snake.next_direction)  # Обновление направления змейки
-        snake.move()  # Перемещение змейки
+        # Сначала обработка нажатий клавиш
+        handle_keys(snake)
+        # Обновление направления змейки
+        snake.update_direction(snake.next_direction)
+        # Перемещение змейки
+        snake.move()
 
         # ПроверкаCollision-ов
         if snake.get_head_position() == apple.position:
-            snake.positions.append(snake.last)  # Увеличиваем змейку
-            apple.reset_position(snake)  # Яблоко сменит позицию (метод должен учитывать позицию змейки)
+            # Увеличиваем змейку
+            snake.positions.append(snake.last)
+            # Яблоко сменит позицию (метод должен учитывать позицию змейки)
+            apple.reset_position(snake)
         elif snake.get_head_position() in snake.snake_position():
             screen.fill(BOARD_BACKGROUND_COLOR)
-            snake.reset()  # Сброс змейки при столкновении с собой
+            # Сброс змейки при столкновении с собой
+            snake.reset()
 
         # Отрисовка всех объектов
         apple.draw()
         snake.draw()
-        pygame.display.update()  # Обновление экрана
+        # Обновление экрана
+        pygame.display.update()
 
 
-if __name__ == "__main__":  # Исправление блока проверки имени
+# Исправление блока проверки имени
+if __name__ == "__main__":
     main()
