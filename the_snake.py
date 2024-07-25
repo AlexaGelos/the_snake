@@ -101,8 +101,7 @@ class Apple(GameObject):
         )
 
     def reset_position(self, snake):
-        """Смена позиции яблока, чтобы оно не появлялось на занятых клетках змейки.
-        """
+        """Смена позиции яблока, чтобы оно не появлялось на занятых клетках."""
         while True:
             new_position = self.randomize_position()
             if new_position not in snake.snake_position():
