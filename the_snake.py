@@ -88,10 +88,12 @@ class Apple(GameObject):
     Описывающий яблоко и действия с ним.
     """
 
-    def __init__(self, restricted_positions):
+    def __init__(self, restricted_positions=None):
         """Конструктор класса Apple."""
         super().__init__()
         self.position = None
+        if restricted_positions is None:
+            restricted_positions = []
         self.reset_position(restricted_positions)
         self.body_color = APPLE_COLOR
 
