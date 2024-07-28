@@ -165,8 +165,8 @@ class Snake(GameObject):
             # Зануляем self.last, если длина не превышена
             self.last = None
 
-
     def increase_size(self):
+        """Увиличиваем длины змейки при поедании яблока."""
         # Увеличиваем змейку
         self.positions.append(self.last)
 
